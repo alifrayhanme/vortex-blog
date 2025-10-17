@@ -2,12 +2,12 @@
 import { createBrowserRouter } from "react-router";
 
 // internal imports
-import Navbar from "../Components/navbar/Navbar";
+import Layout from "../layout/layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar />,
+    element: <Layout />,
     children: [
       { path: "/", element: <div>Home Page</div> },
       { path: "/about", element: <div>About Page</div> },
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/contact", element: <div>Contact Page</div> },
     ],
   },
+
 ]);
 
 export default router;

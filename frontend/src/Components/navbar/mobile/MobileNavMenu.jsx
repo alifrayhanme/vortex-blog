@@ -45,7 +45,7 @@ const MobileNavMenu = () => {
             <div className="border-t py-2.5">
               <Link
                 to={"#"}
-                className="hover:text-red-600 active:text-red-700 flex justify-start items-center gap-2.5"
+                className="hover:text-[#d03219] active:text-red-700 flex justify-start items-center gap-2.5"
               >
                 <FaUserCircle size={24} /> <span>Profile</span>
               </Link>

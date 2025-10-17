@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
 import MobileNav from "./mobile/MobileNav";
 import MobileNavMenu from "./mobile/MobileNavMenu";
 import DesktopNav from "./desktop/DesktopNav";
@@ -37,8 +36,6 @@ const Navbar = () => {
           <MobileNavMenu />
         </>
       )}
-
-      <Outlet />
     </>
   );
 };

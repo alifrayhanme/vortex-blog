@@ -18,17 +18,17 @@ const DesktopNav = () => {
   return (
     <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-8">
       <div className="flex justify-center items-center gap-5 ">
-        <Link to={"#"} className="hover:text-red-600 text-gray-800">
+        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
           <FaInstagram size={20} />
         </Link>
-        <Link to={"#"} className="hover:text-red-600 text-gray-800">
+        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
           <FaFacebookF size={20} />
         </Link>
 
-        <Link to={"#"} className="hover:text-red-600 text-gray-800">
+        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
           <FaLinkedinIn size={20} />
         </Link>
-        <Link to={"#"} className="hover:text-red-600 text-gray-800">
+        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
           <FaYoutube size={20} />
         </Link>
       </div>
@@ -40,12 +40,18 @@ const DesktopNav = () => {
       <div>
         {isSign ? (
           <div>
-            <Link className="hover:text-red-600 active:text-red-700"><FaUserCircle size={24}/></Link>
+            <Link className="hover:text-[#d03219] active:text-red-700">
+              <FaUserCircle size={24} />
+            </Link>
           </div>
         ) : (
           <div className="space-x-2.5">
-            <button className="border active:bg-gray-200 px-2 py-0.5 rounded-xs">Sign Up</button>
-            <button className="border active:bg-gray-200 px-2 py-0.5 rounded-xs">Log In</button>
+            <button className="border active:bg-gray-200 px-2 py-0.5 rounded-xs">
+              Sign Up
+            </button>
+            <button className="border active:bg-gray-200 px-2 py-0.5 rounded-xs">
+              Log In
+            </button>
           </div>
         )}
       </div>
