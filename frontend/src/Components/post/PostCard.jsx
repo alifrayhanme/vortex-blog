@@ -11,7 +11,9 @@ const PostCard = ({ post }) => {
       <div>
         <img src={banner} alt="post banner" />
       </div>
-      <div className="text-brand uppercase font-medium text-xs">{category}</div>
+      <div className="text-secondary uppercase font-medium text-xs">
+        {category}
+      </div>
       <div className="font-semibold text-xl">{title}</div>
       <div className="font-medium text-xs">{date}</div>
       <div className="font-light">{description}</div>

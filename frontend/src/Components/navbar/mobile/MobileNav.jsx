@@ -16,11 +16,11 @@ const MobileNav = () => {
     <div className="flex justify-between items-center gap-10 p-5">
       <div>
         <Link to={"/"} onClick={() => isMenuOpen(false)}>
-          <img src={logo} alt="brand-logo" />
+          <img src={logo} alt="secondary-logo" />
         </Link>
       </div>
 
-      <div className="border border-brand text-brand active:bg-gray-200 h-9 w-9 rounded-xs flex justify-center items-center">
+      <div className="border border-secondary text-secondary active:bg-gray-200 h-9 w-9 rounded-xs flex justify-center items-center">
         {isMenuOpen ? (
           // Menu Open → show X (close)
           <div>

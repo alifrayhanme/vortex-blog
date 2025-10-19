@@ -18,7 +18,7 @@ const Search = () => {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <button
-          className="bg-text text-background py-2 px-4 font-medium active:bg-gray-900"
+          className="bg-tertiary text-primary py-2 px-4 font-medium active:bg-gray-900"
           onClick={handleSearch}
         >
           Search

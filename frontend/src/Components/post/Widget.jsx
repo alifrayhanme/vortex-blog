@@ -4,7 +4,7 @@ const Widget = ({ data }) => {
   return (
     <div className="space-y-5">
       <div className="text-3xl font-bold">Recent Posts</div>
-      <div className="space-y-2.5 text-brand">
+      <div className="space-y-2.5 text-secondary">
         {data.map((post, index) => (
           <div key={index}>{post}</div>
         ))}

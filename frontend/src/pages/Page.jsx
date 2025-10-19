@@ -50,7 +50,7 @@ const Page = ({
       {/* Divider */}
       <hr
         style={{ height: `${height}px` }}
-        className="w-px bg-text border-0 mx-4 hidden mdx:block"
+        className="w-px bg-tertiary border-0 mx-4 hidden mdx:block"
       />
 
       {/* Sidebar */}
