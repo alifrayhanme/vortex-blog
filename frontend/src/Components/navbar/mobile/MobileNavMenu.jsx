@@ -9,7 +9,6 @@ const MobileNavMenu = () => {
   const isMenuOpen = useSelector((state) => state.navmenu.isMenuOpen);
 
   const menuItems = [
-    { id: "home", name: "Home", path: "/" },
     { id: "health", name: "Health", path: "/health" },
     { id: "sports", name: "Sports", path: "/sports" },
     { id: "politics", name: "Politics", path: "/politics" },
@@ -45,7 +44,7 @@ const MobileNavMenu = () => {
             <div className="border-t py-2.5">
               <Link
                 to={"#"}
-                className="hover:text-[#d03219] active:text-red-700 flex justify-start items-center gap-2.5"
+                className="hover:text-brand active:text-red-700 flex justify-start items-center gap-2.5"
               >
                 <FaUserCircle size={24} /> <span>Profile</span>
               </Link>

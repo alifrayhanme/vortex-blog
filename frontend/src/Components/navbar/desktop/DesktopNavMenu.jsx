@@ -3,7 +3,6 @@ import { Link } from "react-router";
 
 const DesktopNavMenu = () => {
   const menuItems = [
-    { id: "home", name: "Home", path: "/" },
     { id: "health", name: "Health", path: "/health" },
     { id: "sports", name: "Sports", path: "/sports" },
     { id: "politics", name: "Politics", path: "/politics" },
@@ -21,7 +20,7 @@ const DesktopNavMenu = () => {
         <ul key={item.id} id={item.id}>
           <Link
             to={item.path}
-            className="py-1 block font-semibold text-lg active:bg-gray-200"
+            className="p-1 block font-semibold text-lg hover:text-brand focus:text-brand active:bg-gray-200"
           >
             {item.name}
           </Link>

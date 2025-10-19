@@ -20,7 +20,7 @@ const MobileNav = () => {
         </Link>
       </div>
 
-      <div className="border border-[#d03219] text-[#d03219] active:bg-gray-200 h-9 w-9 rounded-xs flex justify-center items-center">
+      <div className="border border-brand text-brand active:bg-gray-200 h-9 w-9 rounded-xs flex justify-center items-center">
         {isMenuOpen ? (
           // Menu Open → show X (close)
           <div>

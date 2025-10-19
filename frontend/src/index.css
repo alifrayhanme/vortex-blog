@@ -2,4 +2,9 @@
 
 @theme {
   --breakpoint-mdx: 57.5rem;
+  --breakpoint-xs: 31.25rem;
+
+  --color-brand: #d03219;
+  --color-text: #000000;
+  --color-background: #ffffff;
 }

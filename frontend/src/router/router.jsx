@@ -3,25 +3,38 @@ import { createBrowserRouter } from "react-router";
 
 // internal imports
 import Layout from "../layout/layout";
+import Home from "../pages/Home";
+import Health from "../pages/Health";
+import Sports from "../pages/Sports";
+import Politics from "../pages/Politics";
+import Business from "../pages/Business";
+import Arts from "../pages/Arts";
+import Science from "../pages/Science";
+import World from "../pages/World";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Error from "../pages/Error";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <Error />,
     children: [
-      { path: "/", element: <div>Home Page</div> },
-      { path: "/about", element: <div>About Page</div> },
-      { path: "/health", element: <div>Health Page</div> },
-      { path: "/sports", element: <div>Sports Page</div> },
-      { path: "/politics", element: <div>Politics Page</div> },
-      { path: "/business", element: <div>Business Page</div> },
-      { path: "/arts", element: <div>Arts Page</div> },
-      { path: "/science", element: <div>Science Page</div> },
-      { path: "/world", element: <div>World Page</div> },
-      { path: "/contact", element: <div>Contact Page</div> },
+      { path: "/", element: <Home /> },
+      { path: "/health", element: <Health /> },
+      { path: "/sports", element: <Sports /> },
+      { path: "/politics", element: <Politics /> },
+      { path: "/business", element: <Business /> },
+      { path: "/arts", element: <Arts /> },
+      { path: "/science", element: <Science /> },
+      { path: "/world", element: <World /> },
+      { path: "/about", element: <About /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
-
 ]);
 
 export default router;

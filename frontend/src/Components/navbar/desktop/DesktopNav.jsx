@@ -18,17 +18,17 @@ const DesktopNav = () => {
   return (
     <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-8">
       <div className="flex justify-center items-center gap-5 ">
-        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
+        <Link to={"#"} className="hover:text-brand text-gray-800">
           <FaInstagram size={20} />
         </Link>
-        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
+        <Link to={"#"} className="hover:text-brand text-gray-800">
           <FaFacebookF size={20} />
         </Link>
 
-        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
+        <Link to={"#"} className="hover:text-brand text-gray-800">
           <FaLinkedinIn size={20} />
         </Link>
-        <Link to={"#"} className="hover:text-[#d03219] text-gray-800">
+        <Link to={"#"} className="hover:text-brand text-gray-800">
           <FaYoutube size={20} />
         </Link>
       </div>
@@ -40,7 +40,7 @@ const DesktopNav = () => {
       <div>
         {isSign ? (
           <div>
-            <Link className="hover:text-[#d03219] active:text-red-700">
+            <Link className="hover:text-brand active:text-red-700">
               <FaUserCircle size={24} />
             </Link>
           </div>
