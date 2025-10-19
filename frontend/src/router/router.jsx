@@ -2,7 +2,7 @@
 import { createBrowserRouter } from "react-router";
 
 // internal imports
-import Layout from "../layout/layout";
+import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import Health from "../pages/Health";
 import Sports from "../pages/Sports";
