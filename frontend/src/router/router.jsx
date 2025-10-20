@@ -15,6 +15,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Error from "../pages/Error";
 import NotFound from "../pages/NotFound";
+import CreatePost from "../pages/CreatePost";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "/world", element: <World /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/create-post", element: <CreatePost /> },
       { path: "*", element: <NotFound /> },
     ],
   },

@@ -8,3 +8,24 @@
   --color-secondary: #d03219;
   --color-tertiary: #000000;
 }
+
+
+::selection {
+  background-color: #d03219;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #d94132;
+  color: white;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+

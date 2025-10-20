@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 const MobileNavMenu = () => {
-  const isSign = false;
+  const isSign = true;
 
   const isMenuOpen = useSelector((state) => state.navmenu.isMenuOpen);
 
@@ -41,13 +41,20 @@ const MobileNavMenu = () => {
           ))}
 
           {isSign ? (
-            <div className="border-t py-2.5">
-              <Link
-                to={"#"}
-                className="hover:text-secondary active:text-red-700 flex justify-start items-center gap-2.5"
-              >
-                <FaUserCircle size={24} /> <span>Profile</span>
-              </Link>
+            <div className="border-t py-2.5 space-y-2.5">
+              <li>
+                <Link to={"/create-post"} className="hover:text-secondary active:text-red-700">
+                  Create Post
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"#"}
+                  className="hover:text-secondary active:text-red-700 flex justify-start items-center gap-2.5"
+                >
+                  <FaUserCircle size={24} /> <span>Profile</span>
+                </Link>
+              </li>
             </div>
           ) : (
             <div className="border-t space-y-2 py-2.5 ">

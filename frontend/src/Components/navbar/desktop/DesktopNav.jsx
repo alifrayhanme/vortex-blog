@@ -13,7 +13,7 @@ import {
 import logo from "../../../assets/logo.svg";
 
 const DesktopNav = () => {
-  const isSign = false;
+  const isSign = true;
 
   return (
     <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-8">
@@ -39,7 +39,10 @@ const DesktopNav = () => {
       </div>
       <div>
         {isSign ? (
-          <div>
+          <div className="flex gap-2.5">
+            <Link  to={"/create-post"}  className="bg-tertiary rounded-xs hover:bg-secondary active:bg-red-700 text-primary px-2.5">
+              Create Post
+            </Link>
             <Link className="hover:text-secondary active:text-red-700">
               <FaUserCircle size={24} />
             </Link>
