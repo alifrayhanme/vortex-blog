@@ -3,16 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 // internal import
 import PostCard from "../Components/post/PostCard";
-import Search from "../Components/post/Search";
 import Widget from "../Components/post/Widget";
+import Search from "../Components/post/Search";
 
-const Page = ({
-  posts = [],
-  recentPosts = [],
-  categories = [],
-  title,
-  onSearch,
-}) => {
+const Page = ({ posts = [], recentPosts = [], categories = [], title }) => {
   const contentRef = useRef(null);
   const sidebarRef = useRef(null);
   const [height, setHeight] = useState(0);
@@ -55,7 +49,9 @@ const Page = ({
 
       {/* Sidebar */}
       <div className="space-y-5" ref={sidebarRef}>
-        <Search onSearch={onSearch} />
+        
+        <Search />
+
         <div className="grid grid-cols-1 xs:grid-cols-2 mdx:grid-cols-1 gap-5">
           {recentPosts.length > 0 && (
             <Widget title="Recent Posts" data={recentPosts} />

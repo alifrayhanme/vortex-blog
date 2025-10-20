@@ -1,31 +1,15 @@
-import React, { useState } from "react";
+import React from 'react'
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearch = () => {
-    return;
-  };
-
   return (
-    <>
-      <p>Search</p>
-      <div className="space-x-2 mt-1 flex">
-        <input
-          type="search"
-          className="border outline-none py-2 px-4 rounded-sm"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <button
-          className="bg-tertiary text-primary py-2 px-4 font-medium active:bg-gray-900"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
-      </div>
-    </>
-  );
-};
+    <div className='space-y-1'>
+        <h2>Search</h2>
+        <div className='flex gap-1.5'>
+            <input className='py-1.5 px-3.5 border outline-none rounded-sm' type="search" />
+            <button className='bg-tertiary text-primary active:bg-gray-800 py-1.5 px-3.5'>Search</button>
+        </div>
+    </div>
+  )
+}
 
-export default Search;
+export default Search

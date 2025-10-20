@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Page from "./page";
 
 const Health = () => {
-  const [filteredPosts, setFilteredPosts] = useState([]);
 
   const healthPosts = [
     {
@@ -52,26 +51,15 @@ const Health = () => {
     "World (4)",
   ];
 
-  const handleSearch = (searchTerm) => {
-    if (searchTerm.trim()) {
-      const filtered = healthPosts.filter((post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredPosts(filtered);
-    } else {
-      setFilteredPosts([]);
-    }
-  };
 
-  const postsToShow = filteredPosts.length > 0 ? filteredPosts : healthPosts;
+
 
   return (
     <Page
-      posts={postsToShow}
+      posts={healthPosts}
       recentPosts={recentPostsTitle}
       categories={categoriesByPost}
       title="Health"
-      onSearch={handleSearch}
     />
   );
 };
