@@ -16,6 +16,7 @@ import Contact from "../pages/Contact";
 import Error from "../pages/Error";
 import NotFound from "../pages/NotFound";
 import CreatePost from "../pages/CreatePost";
+import User from "../pages/User";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
       { path: "/create-post", element: <CreatePost /> },
+      { path: "/user", element: <User /> },
       { path: "*", element: <NotFound /> },
     ],
   },

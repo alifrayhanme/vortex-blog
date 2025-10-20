@@ -43,13 +43,18 @@ const MobileNavMenu = () => {
           {isSign ? (
             <div className="border-t py-2.5 space-y-2.5">
               <li>
-                <Link to={"/create-post"} className="hover:text-secondary active:text-red-700">
+                <Link
+                  onClick={() => isMenuOpen(false)}
+                  to={"/create-post"}
+                  className="hover:text-secondary active:text-red-700"
+                >
                   Create Post
                 </Link>
               </li>
               <li>
                 <Link
-                  to={"#"}
+                  onClick={() => isMenuOpen(false)}
+                  to={"/user"}
                   className="hover:text-secondary active:text-red-700 flex justify-start items-center gap-2.5"
                 >
                   <FaUserCircle size={24} /> <span>Profile</span>

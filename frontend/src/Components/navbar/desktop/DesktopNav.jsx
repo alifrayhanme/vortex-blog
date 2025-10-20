@@ -39,12 +39,12 @@ const DesktopNav = () => {
       </div>
       <div>
         {isSign ? (
-          <div className="flex gap-2.5">
-            <Link  to={"/create-post"}  className="bg-tertiary rounded-xs hover:bg-secondary active:bg-red-700 text-primary px-2.5">
+          <div className="flex items-center gap-2.5">
+            <Link  to={"/create-post"}  className="bg-tertiary rounded-md hover:bg-secondary active:bg-red-700 text-primary px-3 py-0.5">
               Create Post
             </Link>
-            <Link className="hover:text-secondary active:text-red-700">
-              <FaUserCircle size={24} />
+            <Link to={"/user"} className="hover:text-secondary active:text-red-700">
+              <FaUserCircle size={26} />
             </Link>
           </div>
         ) : (
