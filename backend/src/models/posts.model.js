@@ -10,8 +10,8 @@ const postSchema = new Schema(
             trim: true,
             index: true,
             maxLength: [
-                50,
-                "Maximum character length in title is 50. You entered more than 50 character",
+                80,
+                "Maximum character length in title is 80. You entered more than 80 character",
             ],
         },
         author: {

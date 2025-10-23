@@ -22,7 +22,7 @@ const userSchema = new Schema(
             unique: true,
             lowercase: true,
             match: [
-                /^[^s@]+@[^s@]+.[^s@]+$/,
+                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 "Email pattern mismatch, it must match following pattern: user@example.com",
             ],
         },
