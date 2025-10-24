@@ -1,19 +1,25 @@
 {
     "name": "backend",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "src\\app.js",
     "scripts": {
-        "dev": "node --watch index.js"
+        "start": "node --env-file=.env --watch src\\app.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Md Ragib Intiser, Tasnuva Islam Mila",
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "bcrypt": "^6.0.0",
+        "body-parser": "^2.2.0",
+        "cloudinary": "^1.41.3",
         "dotenv": "^17.2.3",
         "express": "^5.1.0",
         "helmet": "^8.1.0",
         "jsonwebtoken": "^9.0.2",
-        "morgan": "^1.10.1"
+        "mongoose": "^8.19.1",
+        "morgan": "^1.10.1",
+        "multer": "^2.0.2",
+        "multer-storage-cloudinary": "^4.0.0"
     }
 }
