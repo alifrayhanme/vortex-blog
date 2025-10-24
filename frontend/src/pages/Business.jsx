@@ -9,47 +9,44 @@ const Business = () => {
       id: 1,
       banner: "/business-post-banner.jpg",
       category: "Business",
-      title: "Olympics 2025: The Cyclists to Watch",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam facilisis orci consectetur, blandit justo ut, tempor turpis. Vestibulum facilisis condimentum",
-      date: "February 24, 2025",
+      title: "The Rise of Remote Work: Transforming Modern Business",
+      description: "The COVID-19 pandemic accelerated a workplace revolution that was already underway. Remote work has become a fundamental aspect of modern business operations...",
+      date: "January 10, 2025",
     },
     {
       id: 2,
       banner: "/business-post-banner.jpg",
       category: "Business",
-      title: "10 Tips for Better Mental Health",
-      description:
-        "Discover effective strategies to improve your mental wellbeing and reduce stress in daily life.",
-      date: "February 20, 2025",
+      title: "Digital Transformation in Small Businesses",
+      description: "Small businesses are embracing digital tools to compete in the modern marketplace and improve efficiency.",
+      date: "January 8, 2025",
     },
     {
       id: 3,
       banner: "/business-post-banner.jpg",
       category: "Business",
-      title: "Benefits of Regular Exercise",
-      description:
-        "Learn about the physical and mental benefits of maintaining a consistent exercise routine.",
-      date: "February 18, 2025",
+      title: "Sustainable Business Practices for 2025",
+      description: "Companies are adopting eco-friendly practices to meet consumer demands and regulatory requirements.",
+      date: "January 5, 2025",
     },
   ];
 
   const recentPostsTitle = [
-    "Olympics 2025: The Cyclists to Watch",
-    "The Top Film Festivals Showcasing Emerging Talent",
-    "How Virtual Reality is Revolutionizing the Art World",
-    "Understanding the Evolution of Digital Art Marketplaces",
-    "Understanding Voter Turnout Trends in Democratic Elections",
+    "The Future of Artificial Intelligence in Healthcare",
+    "Climate Change: Understanding the Global Impact",
+    "The Rise of Remote Work: Transforming Modern Business",
+    "Breaking News: Major Political Reform Announced",
+    "World Cup 2026: Preparations Underway",
   ];
 
   const categoriesByPost = [
-    "Arts (4)",
-    "Business (2)",
-    "Health (5)",
-    "Business (2)",
-    "Science (2)",
-    "Business (2)",
-    "World (4)",
+    "World (45)",
+    "Politics (32)",
+    "Business (28)",
+    "Science (21)",
+    "Health (19)",
+    "Sports (35)",
+    "Arts (16)",
   ];
 
   const handleSearch = (searchTerm) => {

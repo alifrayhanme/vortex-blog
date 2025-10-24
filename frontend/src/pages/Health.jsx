@@ -2,34 +2,30 @@ import React from "react";
 import Page from "./page";
 
 const Health = () => {
-
   const healthPosts = [
     {
       id: 1,
       banner: "/health-post-banner.jpg",
       category: "health",
-      title: "Breaking Down the Latest Nutritional Guidelines",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam facilisis orci consectetur, blandit justo ut, tempor turpis. Vestibulum facilisis condimentum",
-      date: "February 24, 2025",
+      title: "The Future of Artificial Intelligence in Healthcare",
+      description: "Artificial Intelligence is transforming healthcare at an unprecedented pace. From diagnostic imaging to personalized treatment plans, AI is revolutionizing how we approach medical care...",
+      date: "January 15, 2025",
     },
     {
       id: 2,
       banner: "/health-post-banner.jpg",
       category: "health",
       title: "10 Tips for Better Mental Health",
-      description:
-        "Discover effective strategies to improve your mental wellbeing and reduce stress in daily life.",
-      date: "February 20, 2025",
+      description: "Discover effective strategies to improve your mental wellbeing and reduce stress in daily life.",
+      date: "January 12, 2025",
     },
     {
       id: 3,
       banner: "/health-post-banner.jpg",
       category: "health",
       title: "Benefits of Regular Exercise",
-      description:
-        "Learn about the physical and mental benefits of maintaining a consistent exercise routine.",
-      date: "February 18, 2025",
+      description: "Learn about the physical and mental benefits of maintaining a consistent exercise routine.",
+      date: "January 10, 2025",
     },
   ];
 
@@ -42,13 +38,13 @@ const Health = () => {
   ];
 
   const categoriesByPost = [
-    "Arts (4)",
-    "Business (2)",
-    "Health (5)",
-    "Politics (2)",
-    "Science (2)",
-    "Sports (2)",
-    "World (4)",
+    "World (45)",
+    "Politics (32)",
+    "Business (28)",
+    "Science (21)",
+    "Health (19)",
+    "Sports (35)",
+    "Arts (16)",
   ];
 
 

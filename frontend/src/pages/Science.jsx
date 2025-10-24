@@ -9,47 +9,44 @@ const Science = () => {
       id: 1,
       banner: "/science-post-banner.jpg",
       category: "Science",
-      title: "Olympics 2025: The Cyclists to Watch",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam facilisis orci consectetur, blandit justo ut, tempor turpis. Vestibulum facilisis condimentum",
-      date: "February 24, 2025",
+      title: "Climate Change: Understanding the Global Impact",
+      description: "Climate change represents one of the most pressing challenges of our time. The scientific evidence is clear: human activities are driving unprecedented changes in Earth's climate system...",
+      date: "January 12, 2025",
     },
     {
       id: 2,
       banner: "/science-post-banner.jpg",
       category: "Science",
-      title: "10 Tips for Better Mental Health",
-      description:
-        "Discover effective strategies to improve your mental wellbeing and reduce stress in daily life.",
-      date: "February 20, 2025",
+      title: "Breakthrough in Quantum Computing",
+      description: "Scientists have achieved a major milestone in quantum computing that could revolutionize technology.",
+      date: "January 9, 2025",
     },
     {
       id: 3,
       banner: "/science-post-banner.jpg",
       category: "Science",
-      title: "Benefits of Regular Exercise",
-      description:
-        "Learn about the physical and mental benefits of maintaining a consistent exercise routine.",
-      date: "February 18, 2025",
+      title: "Space Exploration: Mars Mission Updates",
+      description: "Latest developments in the ongoing Mars exploration missions and future plans for human settlement.",
+      date: "January 6, 2025",
     },
   ];
 
   const recentPostsTitle = [
-    "Olympics 2025: The Cyclists to Watch",
-    "The Top Film Festivals Showcasing Emerging Talent",
-    "How Virtual Reality is Revolutionizing the Art World",
-    "Understanding the Evolution of Digital Art Marketplaces",
-    "Understanding Voter Turnout Trends in Democratic Elections",
+    "The Future of Artificial Intelligence in Healthcare",
+    "Climate Change: Understanding the Global Impact",
+    "The Rise of Remote Work: Transforming Modern Business",
+    "Breaking News: Major Political Reform Announced",
+    "World Cup 2026: Preparations Underway",
   ];
 
   const categoriesByPost = [
-    "Arts (4)",
-    "Business (2)",
-    "Health (5)",
-    "Science (2)",
-    "Science (2)",
-    "Science (2)",
-    "World (4)",
+    "World (45)",
+    "Politics (32)",
+    "Business (28)",
+    "Science (21)",
+    "Health (19)",
+    "Sports (35)",
+    "Arts (16)",
   ];
 
   const handleSearch = (searchTerm) => {

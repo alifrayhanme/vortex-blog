@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-
 import Placeholder from "@tiptap/extension-placeholder";
+
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
