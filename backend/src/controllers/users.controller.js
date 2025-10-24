@@ -1,4 +1,4 @@
-const { User } = require("../models/users.model.js");
+const User = require("../models/users.model.js");
 
 async function getAllUser(req, res) {
     const queryNames = Object.getOwnPropertyNames(req.query);
@@ -84,31 +84,30 @@ async function getUser(req, res) {
     }
 }
 
-async function createUser(req, res) {
-    try {
-        const result = await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-        });
+// async function createUser(req, res) {
+//   try {
+//     const result = await User.create({
+//       name: req.body.name,
+//       email: req.body.email,
+//       password: req.body.password,
+//     });
 
-        res.status(201).send({
-            ok: true,
-            message: "User created",
-            data: result,
-        });
-    } catch (err) {
-        res.status(404).send({
-            ok: false,
-            message: "Something went wrong",
-            error: err instanceof Error ? err.message : err,
-            errorType: err instanceof Error ? err.name : "Error",
-        });
-    }
-}
+//     res.status(201).send({
+//       ok: true,
+//       message: "User created",
+//       data: result,
+//     });
+//   } catch (err) {
+//     res.status(404).send({
+//       ok: false,
+//       message: "Something went wrong",
+//       error: err instanceof Error ? err.message : err,
+//       errorType: err instanceof Error ? err.name : "Error",
+//     });
+//   }
+// }
 
 module.exports = {
     getAllUser,
     getUser,
-    createUser,
 };

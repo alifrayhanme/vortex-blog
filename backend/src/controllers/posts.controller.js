@@ -71,6 +71,7 @@ async function getPostWithSearchParams(req, res) {
         if (!result) {
             return res.status(404).send({
                 ok: false,
+                message: "Something went wrong",
                 error: "No post found",
                 errorType: "NotFound",
             });
@@ -98,6 +99,7 @@ async function getPost(req, res) {
         if (!result) {
             return res.status(404).send({
                 ok: false,
+                message: "Something went wrong",
                 error: "No Post Found",
                 errorType: "NotFound",
             });

@@ -12,27 +12,29 @@ const PORT = process.env.PORT || 9000;
 
 const app = express();
 
+app.use(express.json());
+
 defaultMiddlewares(app);
 
 if (!checkConnection()) {
-    connectDB(process.env.MONGODB_URI);
+  connectDB(process.env.MONGODB_URI);
 }
 
 app.get("/", function (_, res) {
-    res.send({
-        ok: true,
-        message: "Home route",
-    });
+  res.send({
+    ok: true,
+    message: "Home route",
+  });
 });
 
 app.use("/api/v1", allRoutes);
 
 app.use(function (_, res) {
-    res.send({ message: "Route not found" });
+  res.send({ message: "Route not found" });
 });
 
 const server = app.listen(PORT, function () {
-    console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`Listening at http://localhost:${PORT}`);
 });
 
 process.on("SIGTERM", () => handleShutdown(server));
