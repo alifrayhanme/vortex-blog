@@ -1,5 +1,5 @@
 const { Router, json, urlencoded } = require("express");
-const userController = require("../controllers/users.controller");
+const userController = require("../controllers/users.controller.js");
 
 const router = Router();
 
@@ -8,6 +8,5 @@ router.use(urlencoded({ extended: true }));
 
 router.get("/", userController.getAllUser);
 router.get("/:id", userController.getUser);
-router.post("/create", userController.createUser);
 
 module.exports = router;
