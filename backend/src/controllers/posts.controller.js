@@ -9,7 +9,7 @@ async function getPosts(req, res) {
 
     try {
         const limit = req.query.limit || 6;
-        const skip = (req.query.page || 1) - 1 * limit;
+        const skip = ((req.query.page || 1) - 1) * limit;
 
         const totalDocumentCount = await Post.countDocuments();
         const maxPage = Math.ceil(totalDocumentCount / limit);
@@ -36,7 +36,7 @@ async function getPosts(req, res) {
 async function getPostWithCategory(req, res) {
     try {
         const limit = req.query.limit || 6;
-        const skip = (req.query.page || 1) - 1 * limit;
+        const skip = ((req.query.page || 1) - 1) * limit;
 
         const totalDocumentCount = await Post.countDocuments({
             category: req.query.category,
