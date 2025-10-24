@@ -1,4 +1,4 @@
-const { Router } = require("express");
+const { Router, json } = require("express");
 const userRouter = require("./users.route.js");
 const postRouter = require("./posts.route.js");
 const authRouter = require("./auth.route.js");
@@ -10,13 +10,13 @@ const router = Router();
 
 router.use("/user", userRouter);
 router.use("/post", postRouter);
-router.use("/auth", authRouter);
+router.use("/auth", json(), authRouter);
 
 router.post(
-  "/upload-image",
-  bodyParser.urlencoded({ extended: true }),
-  upload.single("image"),
-  uploadImage
+    "/upload-image",
+    bodyParser.urlencoded({ extended: true }),
+    upload.single("image"),
+    uploadImage
 );
 
 module.exports = router;
