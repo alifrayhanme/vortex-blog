@@ -1,65 +1,33 @@
 // external import
-import React, { useEffect, useRef, useState } from "react";
-
-// internal import
+import React from "react";
 import PostCard from "../Components/post/PostCard";
-import Widget from "../Components/post/Widget";
 import Search from "../Components/post/Search";
+import { RecentPosts } from "../Components/post/RecentPosts";
+import Categories from "../Components/post/Categories";
 
-const Page = ({ posts = [], recentPosts = [], categories = [], title }) => {
-  const contentRef = useRef(null);
-  const sidebarRef = useRef(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      const contentHeight = contentRef.current?.offsetHeight || 0;
-      const sidebarHeight = sidebarRef.current?.offsetHeight || 0;
-      setHeight(Math.max(contentHeight, sidebarHeight));
-    };
-
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [posts, recentPosts, categories]);
-
+const Page = ({ posts = [], title, isLoading = false }) => {
   return (
-    <div className="flex flex-col mdx:flex-row justify-between items-start gap-10 mt-14 p-5 max-w-7xl mx-auto">
-      {/* Main Content */}
-      <div className="space-y-5" ref={contentRef}>
+    <div className="flex flex-col mdx:flex-row gap-10 mt-14 p-5 max-w-7xl mx-auto">
+      <div className="flex-1 space-y-5 border-r pr-10">
         <h2 className="text-3xl font-bold">{title}</h2>
         <hr />
         <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-10">
-          {posts.length > 0 ? (
-            posts.map((post, index) => (
-              <PostCard key={post.id || index} post={post} />
-            ))
+          {isLoading ? (
+            <p className="text-gray-500">Loading...</p>
+          ) : posts.length > 0 ? (
+            posts.map((post) => <PostCard key={post._id} post={post} />)
           ) : (
             <p className="text-gray-500">No posts available</p>
           )}
         </div>
       </div>
 
-      {/* Divider */}
-      <hr
-        style={{ height: `${height}px` }}
-        className="w-px bg-tertiary border-0 mx-4 hidden mdx:block"
-      />
 
-      {/* Sidebar */}
-      <div className="space-y-5" ref={sidebarRef}>
-        
+
+      <div className="w-full mdx:w-80 space-y-5">
         <Search />
-
-        <div className="grid grid-cols-1 xs:grid-cols-2 mdx:grid-cols-1 gap-5">
-          {recentPosts.length > 0 && (
-            <Widget title="Recent Posts" data={recentPosts} />
-          )}
-          {categories.length > 0 && (
-            <Widget title="Categories" data={categories} />
-          )}
-        </div>
+        <RecentPosts />
+        <Categories />
       </div>
     </div>
   );

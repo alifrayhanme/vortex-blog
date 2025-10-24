@@ -1,22 +1,22 @@
-// external import
 import React from "react";
 
-// internal import
-
 const PostCard = ({ post }) => {
-  const { banner, category, title, description, date } = post;
+  const { image_url, category, title, content, updatedAt } = post;
+  
+  const extractText = (html) => {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    const text = div.textContent || '';
+    return text.length > 200 ? text.slice(0, 200) + '...' : text;
+  };
 
   return (
     <div className="space-y-3">
-      <div>
-        <img src={banner} alt="post banner" />
-      </div>
-      <div className="text-secondary uppercase font-medium text-xs">
-        {category}
-      </div>
-      <div className="font-semibold text-xl">{title}</div>
-      <div className="font-medium text-xs">{date}</div>
-      <div className="font-light">{description}</div>
+      <img src={image_url} alt={title} className="w-full" />
+      <div className="text-secondary uppercase text-xs font-medium">{category}</div>
+      <h3 className="font-semibold text-xl">{title}</h3>
+      <div className="text-xs text-gray-500">{new Date(updatedAt).toLocaleDateString()}</div>
+      <p className="text-gray-700">{extractText(content)}</p>
     </div>
   );
 };

@@ -33,6 +33,15 @@ const postSchema = new Schema(
             type: String,
             required: true,
         },
+        description: {
+            type: String,
+            // required: true,
+            trim: true,
+            maxLength: [
+                200,
+                "Maximum character length in description is 200. You entered more than 200 character",
+            ],
+        },
     },
     { timestamps: true }
 );
