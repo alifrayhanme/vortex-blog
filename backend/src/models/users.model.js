@@ -1,4 +1,4 @@
-const { hash, bcryptjs } = require("bcrypt");
+const bcrypt = require("bcrypt");
 const { Schema, model, pluralize } = require("mongoose");
 
 pluralize(null);
@@ -48,13 +48,18 @@ userSchema.statics.isEmailTaken = async function (email) {
 };
 
 userSchema.methods.isPasswordMatch = async function (password) {
-  return bcryptjs?.compare(password, this.password);
+  return bcrypt.compare(password, this.password);
 };
 
 userSchema.pre("save", async function (next) {
-  this.password = await hash(this.password, 10);
+  if (!this.isModified("password")) return next();
 
-  next();
+  try {
+    this.password = await bcrypt.hash(this.password, 10); // Increased salt rounds for better security
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const User = model("Users", userSchema, "users");
