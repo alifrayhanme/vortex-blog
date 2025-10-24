@@ -29,6 +29,53 @@ async function registerUser(req, res) {
   }
 }
 
+async function loginUser(req, res) {
+  const { email, password } = req.body;
+  console.log(email, password);
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user || (await user.isPasswordMatch(password))) {
+      res.status(401).send({
+        success: false,
+        message: "Invalid email or password",
+        suggestion: "Forgot your password? Consider resetting it",
+      });
+    }
+
+    res.send({
+      success: true,
+      message: "Login successful!",
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        lastLogin: user.lastLogin,
+      },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+
+    let errorMessage = "Authentication failed";
+    let suggestion = "Please try again later";
+
+    if (err.name === "MongoError" || err.name === "MongoNetworkError") {
+      errorMessage = "Database connection error";
+      suggestion = "Please try again in a few moments";
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: errorMessage,
+      error: process.env.NODE_ENV === "development" ? err.message : undefined,
+      suggestion: suggestion,
+    });
+  }
+}
+
 module.exports = {
   registerUser,
+  loginUser,
 };

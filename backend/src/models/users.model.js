@@ -1,4 +1,4 @@
-const { hash } = require("bcrypt");
+const { hash, bcryptjs } = require("bcrypt");
 const { Schema, model, pluralize } = require("mongoose");
 
 pluralize(null);
@@ -45,6 +45,10 @@ const userSchema = new Schema(
 userSchema.statics.isEmailTaken = async function (email) {
   const user = await this.findOne({ email });
   return !!user;
+};
+
+userSchema.methods.isPasswordMatch = async function (password) {
+  return bcryptjs?.compare(password, this.password);
 };
 
 userSchema.pre("save", async function (next) {
