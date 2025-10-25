@@ -10,6 +10,9 @@ export const apiSlice = createApi({
     getPosts: builder.query({
       query: () => `/api/v1/post`,
     }),
+    getLatestPosts: builder.query({
+      query: (limit) => `/api/v1/post?limit=${limit}&sort=-createdAt`,
+    }),
     getPost: builder.query({
       query: (id) => `/api/v1/post/${id}`,
     }),
@@ -57,6 +60,7 @@ export const {
   useGetPostWithCategoryQuery,
   useSearchPostsQuery,
   useGetCategoriesQuery,
+  useGetLatestPostsQuery,
   useGetLikesQuery,
   useGetCommentsQuery,
   useAddLikeMutation,

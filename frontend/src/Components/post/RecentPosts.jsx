@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router";
-import { useGetPostsQuery } from "../../features/api/apiSlice";
+import { useGetLatestPostsQuery } from "../../features/api/apiSlice";
 
 export const RecentPosts = () => {
-  const { data, isError, isLoading, error } = useGetPostsQuery();
+  const { data, isError, isLoading, error } = useGetLatestPostsQuery(5);
 
   if (isError)
     return <div className="text-red-500">Error: {error?.message}</div>;
