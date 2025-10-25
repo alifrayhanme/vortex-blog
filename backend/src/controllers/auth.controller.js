@@ -1,4 +1,6 @@
 const User = require("../models/users.model.js");
+const { generateToken } = require("../services/token.service.js");
+const moment = require("moment");
 
 async function registerUser(req, res) {
   const userBody = req.body;
@@ -42,25 +44,41 @@ async function loginUser(req, res) {
 
   try {
     const user = await User.findOne({ email });
-    console.log(email, password);
 
     if (!user || !(await user.isPasswordMatch(password))) {
-      res.status(401).send({
+      return res.status(401).send({
         success: false,
         message: "Invalid email or password",
         suggestion: "Forgot your password? Consider resetting it",
       });
     }
 
+    const accessTokenExpires = moment().add(
+      process.env.JWT_ACCESS_EXPIRATION_MINUTES,
+      "minutes"
+    );
+
+    const accessToken = generateToken(
+      user._id,
+      user.role,
+      accessTokenExpires,
+      "access"
+    );
+
     res.send({
       success: true,
       message: "Login successful!",
       data: {
-        id: user.id,
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
         lastLogin: user.lastLogin,
+        access: {
+          token: accessToken,
+          expires: accessTokenExpires.toDate(),
+          expiresIn: process.env.JWT_ACCESS_EXPIRATION_MINUTES * 60,
+        },
       },
     });
   } catch (err) {
