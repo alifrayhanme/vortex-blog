@@ -6,6 +6,7 @@ const router = Router();
 router.use(json());
 
 router.get("/", postController.getPosts);
+router.get("/categories", postController.getCategories);
 router.get("/:id", postController.getPost);
 router.post(
     "/create",

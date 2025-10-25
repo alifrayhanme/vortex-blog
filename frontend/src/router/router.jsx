@@ -11,6 +11,8 @@ import Error from "../pages/Error";
 import NotFound from "../pages/NotFound";
 import CreatePost from "../pages/CreatePost";
 import User from "../pages/User";
+import { SearchResult } from "../pages/SearchResult";
+import PostDetails from "../pages/PostDetails";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,8 @@ const router = createBrowserRouter([
       { path: "/arts", element: <CategoryPage /> },
       { path: "/science", element: <CategoryPage /> },
       { path: "/world", element: <CategoryPage /> },
+      {path: "/search", element: <SearchResult />},
+      {path: "/post/:id", element: <PostDetails />},
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
       { path: "/create-post", element: <CreatePost /> },

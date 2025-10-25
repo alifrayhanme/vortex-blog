@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { useGetPostsQuery } from "../../features/api/apiSlice";
 
 export const RecentPosts = () => {
@@ -16,9 +17,13 @@ export const RecentPosts = () => {
       <h3 className="text-3xl font-bold">Recent Posts</h3>
       <div className="space-y-2 text-secondary">
         {recentPosts.map((post) => (
-          <div key={post._id} className="text-lg">
+          <Link 
+            key={post._id} 
+            to={`/post/${post._id}`}
+            className="block text-lg hover:text-red-700 transition-colors cursor-pointer"
+          >
             {post.title}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

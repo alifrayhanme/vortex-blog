@@ -94,7 +94,7 @@ async function getPostWithSearchParams(req, res) {
 
 async function getPost(req, res) {
     try {
-        const result = await Post.findById(req.params.id);
+        const result = await Post.findById(req.params.id).populate('author', 'name email picture_url');
 
         if (!result) {
             return res.status(404).send({
@@ -149,8 +149,31 @@ async function createPost(req, res) {
     }
 }
 
+async function getCategories(req, res) {
+    try {
+        const categories = await Post.aggregate([
+            { $group: { _id: "$category", posts: { $sum: 1 } } },
+            { $project: { category: "$_id", posts: 1, _id: 0 } }
+        ]);
+
+        res.status(200).send({
+            ok: true,
+            message: "Categories found",
+            data: categories,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 module.exports = {
     getPosts,
     getPost,
     createPost,
+    getCategories,
 };

@@ -9,8 +9,7 @@ const likeSchema = new Schema(
             ref: "Posts",
         },
         liker_id: {
-            type: Schema.Types.ObjectId,
-            ref: "Users",
+            type: String,
         },
     },
     { timestamps: true }
