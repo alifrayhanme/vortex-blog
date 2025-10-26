@@ -2,6 +2,7 @@ const { Router, urlencoded } = require("express");
 const {
   registerUser,
   loginUser,
+  logoutUser,
 } = require("../controllers/auth.controller.js");
 const {
   checkAuthentication,
@@ -13,6 +14,7 @@ router.use(urlencoded({ extended: true }));
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.post("/logout", logoutUser);
 
 // Check for Private routes authentication
 router.post("/test", checkAuthentication, (req, res) => {

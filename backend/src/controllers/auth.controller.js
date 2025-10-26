@@ -1,4 +1,5 @@
 const User = require("../models/users.model.js");
+const jwt = require("jsonwebtoken");
 const { generateToken } = require("../services/token.service.js");
 const moment = require("moment");
 
@@ -65,6 +66,14 @@ async function loginUser(req, res) {
       "access"
     );
 
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: process.env.JWT_ACCESS_EXPIRATION_MINUTES * 60 * 1000,
+      domain: process.env.COOKIE_DOMAIN || "localhost",
+    });
+
     res.send({
       success: true,
       message: "Login successful!",
@@ -74,11 +83,6 @@ async function loginUser(req, res) {
         email: user.email,
         role: user.role,
         lastLogin: user.lastLogin,
-        access: {
-          token: accessToken,
-          expires: accessTokenExpires.toDate(),
-          expiresIn: process.env.JWT_ACCESS_EXPIRATION_MINUTES * 60,
-        },
       },
     });
   } catch (err) {
@@ -101,7 +105,40 @@ async function loginUser(req, res) {
   }
 }
 
+async function logoutUser(req, res) {
+  try {
+    res.cookie("accessToken", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(0),
+      path: "/",
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Logout successful!",
+    });
+  } catch (err) {
+    console.error("Logout error:", err);
+
+    res.cookie("accessToken", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(0),
+      path: "/",
+    });
+
+    res.status(500).json({
+      success: false,
+      message: "Logout failed",
+      error: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+}
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 };
