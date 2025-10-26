@@ -3,9 +3,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
+    // baseUrl: "https://vortex-blog.vercel.app",
     baseUrl: "http://localhost:8000",
   }),
-  tagTypes: ['Like', 'Comment'],
+  tagTypes: ["Like", "Comment"],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => `/api/v1/post`,
@@ -28,29 +29,28 @@ export const apiSlice = createApi({
     }),
     getLikes: builder.query({
       query: (postId) => `/api/v1/likes/${postId}`,
-      providesTags: ['Like'],
+      providesTags: ["Like"],
     }),
     getComments: builder.query({
       query: (postId) => `/api/v1/comments/${postId}`,
-      providesTags: ['Comment'],
+      providesTags: ["Comment"],
     }),
     addLike: builder.mutation({
       query: ({ postId, liker_id }) => ({
         url: `/api/v1/likes/${postId}`,
-        method: 'POST',
+        method: "POST",
         body: { liker_id },
       }),
-      invalidatesTags: ['Like'],
+      invalidatesTags: ["Like"],
     }),
     addComment: builder.mutation({
       query: ({ postId, commentor_id, comment }) => ({
         url: `/api/v1/comments/${postId}`,
-        method: 'POST',
+        method: "POST",
         body: { commentor_id, comment },
       }),
-      invalidatesTags: ['Comment'],
+      invalidatesTags: ["Comment"],
     }),
-
   }),
 });
 

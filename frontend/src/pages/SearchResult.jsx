@@ -1,5 +1,5 @@
 import React from "react";
-import Page from "./page";
+import Page from "./Page";
 import { useSelector } from "react-redux";
 
 export const SearchResult = () => {
