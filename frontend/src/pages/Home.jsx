@@ -5,6 +5,8 @@ import Stories from "../Components/home/section/Stories";
 import BusinessSection from "../Components/home/section/BusinessSection";
 import WorldSection from "../Components/home/section/WorldSection";
 import ArtsSection from "../Components/home/section/ArtsSection";
+import ContributeSection from "../Components/home/section/ContributeSection";
+import SciencePoliticsSection from "../Components/home/section/SciencePoliticsSection";
 
 const Home = () => {
   return (
@@ -23,6 +25,14 @@ const Home = () => {
 
       <div>
         <BusinessSection />
+      </div>
+
+      <div>
+        <ContributeSection />
+      </div>
+
+      <div>
+        <SciencePoliticsSection />
       </div>
 
       <div>

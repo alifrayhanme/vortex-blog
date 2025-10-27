@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
 import { useGetLatestPostsQuery } from "../../../features/api/apiSlice";
-import Card from "../ui/Card";
+import CardImage from "../ui/CardImage";
+import CardContent from "../ui/CardContent";
 
 const HeroSection = () => {
   const { data, isLoading, isError, error } = useGetLatestPostsQuery(5);
@@ -15,24 +16,12 @@ const HeroSection = () => {
   return (
     <div className="grid grid-cols-1 mdx:grid-cols-2 gap-5">
       {/* Left side - Single post */}
-      {posts[0] && (
-        <div className="relative h-full w-full">
-          <Card
-            post={posts[0]}
-            tailwindClass="w-full h-full object-cover"
-            absoluteClass="absolute left-[5%] bottom-[5%]"
-            titleClass="text-primary"
-            dateClass="text-gray-200"
-          />
-        </div>
-      )}
+      {posts[0] && <CardImage post={posts[0]} />}
 
       {/* Right side - Two posts */}
       <div className="flex flex-col justify-between gap-5">
         {posts.slice(1, 3).map((post) => (
-          <div key={post._id} className="flex xxs:flex-row flex-col gap-3">
-            <Card post={post} />
-          </div>
+          <CardContent key={post._id} post={post} row={true} />
         ))}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import ViewAll from "../ui/ViewAll";
-import Card from "../ui/Card";
 import { useGetPostWithCategoryQuery } from "../../../features/api/apiSlice";
+import CardContent from "../ui/CardContent";
 
 const HealthSection = () => {
   const { data, isLoading, isError, error } =
@@ -20,7 +20,7 @@ const HealthSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {posts.map((post) => (
           <div key={post._id} className="flex flex-col space-y-5">
-            <Card post={post} tailwindClass="w-full" />
+            <CardContent post={post}/>
           </div>
         ))}
       </div>
