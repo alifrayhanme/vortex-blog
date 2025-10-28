@@ -19,7 +19,7 @@ async function getPosts(req, res) {
         res.status(200).send({
             ok: true,
             message: "Posts found",
-            currentPage: req.query.page || 1,
+            currentPage: parseInt(req.query.page) || 1,
             maxPage,
             data: result,
         });
@@ -94,7 +94,10 @@ async function getPostWithSearchParams(req, res) {
 
 async function getPost(req, res) {
     try {
-        const result = await Post.findById(req.params.id).populate('author', 'name email picture_url');
+        const result = await Post.findById(req.params.id).populate(
+            "author",
+            "name email picture_url"
+        );
 
         if (!result) {
             return res.status(404).send({
@@ -128,9 +131,7 @@ async function createPost(req, res) {
             title: userReq.title,
             author: userReq.author,
             category: userReq.category,
-            image_url: userReq.image_url
-                ? userReq.image_url
-                : "/assets/default-post-image.webp",
+            image_url: userReq.image_url || "/assets/default-post-image.webp",
             content: userReq.content,
         });
 
@@ -153,7 +154,7 @@ async function getCategories(req, res) {
     try {
         const categories = await Post.aggregate([
             { $group: { _id: "$category", posts: { $sum: 1 } } },
-            { $project: { category: "$_id", posts: 1, _id: 0 } }
+            { $project: { category: "$_id", posts: 1, _id: 0 } },
         ]);
 
         res.status(200).send({
