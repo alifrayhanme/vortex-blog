@@ -7,11 +7,13 @@ router.use(json());
 
 router.get("/", postController.getPosts);
 router.get("/categories", postController.getCategories);
-router.get("/:id", postController.getPost);
+router.get("/:postId", postController.getPost);
+
 router.post(
     "/create",
     urlencoded({ extended: true, limit: "1mb" }),
     postController.createPost
 );
 
+router.delete("/:postId", postController.deletePost);
 module.exports = router;

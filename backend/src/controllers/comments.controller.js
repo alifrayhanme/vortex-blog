@@ -45,7 +45,35 @@ async function addComment(req, res) {
     }
 }
 
+async function deleteComment(req, res) {
+    try {
+        const result = await Comment.findByIdAndDelete(req.params.commentId);
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "Comment not found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "Comment deleted successfully",
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 module.exports = {
     getComments,
     addComment,
+    deleteComment,
 };

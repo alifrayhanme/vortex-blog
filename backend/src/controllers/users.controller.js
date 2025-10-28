@@ -63,7 +63,7 @@ async function getSpecificUser(req, res, queryNames) {
 
 async function getUser(req, res) {
     try {
-        const result = await User.findById(req.params.id).select(
+        const result = await User.findById(req.params.userid).select(
             "name email role picture_url is_suspended createdAt updatedAt"
         );
 
@@ -90,7 +90,35 @@ async function getUser(req, res) {
     }
 }
 
+async function deleteUser(req, res) {
+    try {
+        const result = await User.findByIdAndDelete(req.params.userId);
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "User not found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "User deleted successfully",
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 module.exports = {
     getAllUser,
     getUser,
+    deleteUser,
 };
