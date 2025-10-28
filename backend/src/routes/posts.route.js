@@ -15,5 +15,11 @@ router.post(
     postController.createPost
 );
 
+router.patch(
+    "/:postId",
+    urlencoded({ extended: true, limit: "1mb" }),
+    postController.editPost
+);
+
 router.delete("/:postId", postController.deletePost);
 module.exports = router;

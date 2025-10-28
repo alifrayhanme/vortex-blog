@@ -123,7 +123,7 @@ async function getPost(req, res) {
     }
 }
 
-async function getCategories(req, res) {
+async function getCategories(_, res) {
     try {
         const categories = await Post.aggregate([
             { $group: { _id: "$category", posts: { $sum: 1 } } },
@@ -172,6 +172,38 @@ async function createPost(req, res) {
     }
 }
 
+async function editPost(req, res) {
+    try {
+        const result = await Post.findByIdAndUpdate(
+            req.params.postId,
+            req.body,
+            { new: true }
+        );
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "Unable to find document",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "Post updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 async function deletePost(req, res) {
     try {
         const result = await Post.findByIdAndDelete(req.params.postId);
@@ -204,5 +236,6 @@ module.exports = {
     getPost,
     getCategories,
     createPost,
+    editPost,
     deletePost,
 };
