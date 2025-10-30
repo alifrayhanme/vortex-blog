@@ -3,7 +3,6 @@ import { Link } from "react-router";
 
 const DesktopNavMenu = () => {
   const menuItems = [
-    { id: "home", name: "Home", path: "/" },
     { id: "health", name: "Health", path: "/health" },
     { id: "sports", name: "Sports", path: "/sports" },
     { id: "politics", name: "Politics", path: "/politics" },
@@ -14,14 +13,14 @@ const DesktopNavMenu = () => {
     { id: "about", name: "About", path: "/about" },
     { id: "contact", name: "Contact", path: "/contact" },
   ];
-  
+
   return (
     <div className="max-w-7xl mx-auto  flex flex-wrap justify-center items-center gap-6 px-5 py-5">
       {menuItems.map((item) => (
         <ul key={item.id} id={item.id}>
           <Link
             to={item.path}
-            className="py-1 block font-semibold text-lg active:bg-gray-200"
+            className="p-1 block font-semibold text-lg hover:text-secondary focus:text-secondary active:bg-gray-200"
           >
             {item.name}
           </Link>

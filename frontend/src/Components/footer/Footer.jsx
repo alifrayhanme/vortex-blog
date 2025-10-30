@@ -19,12 +19,12 @@ const Footer = () => {
   const isMenuOpen = useSelector((state) => state.navmenu.isMenuOpen);
 
   return (
-    <div className="flex flex-col border-t-4 border-[#d03219] mt-10">
-      <div className="bg-black">
-        <div className="max-w-7xl mx-auto text-white p-5 flex flex-wrap justify-between gap-10">
+    <div className="flex flex-col border-t-4 border-secondary mt-10">
+      <div className="bg-tertiary">
+        <div className="max-w-7xl mx-auto text-primary p-5 flex flex-wrap justify-between gap-10">
           <div>
             <Link to={"/"} onClick={() => isMenuOpen(false)}>
-              <img src={logo} alt="brand-logo" />
+              <img src={logo} alt="secondary-logo" />
             </Link>
           </div>
           <div className="flex flex-wrap gap-2.5">
@@ -37,11 +37,11 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-y border-white p-5 bg-black">
-        <div className="max-w-7xl mx-auto flex justify-between sm:justify-start sm:gap-32">
+      <div className="border-y border-primary bg-tertiary">
+        <div className="max-w-7xl mx-auto flex justify-between sm:justify-start sm:gap-32 p-5">
           <div className="space-y-5">
-            <p className="text-white font-semibold text-lg">COMPANY</p>
-            <ul className="list-none text-white">
+            <p className="text-primary font-semibold text-lg">COMPANY</p>
+            <ul className="list-none text-primary">
               <li>
                 <Link to={"/"}>Home</Link>
               </li>
@@ -54,8 +54,8 @@ const Footer = () => {
             </ul>
           </div>
           <div className="space-y-5">
-            <p className="text-white font-semibold text-lg">SOCIAL MEDIA</p>
-            <ul className="list-none text-white">
+            <p className="text-primary font-semibold text-lg">SOCIAL MEDIA</p>
+            <ul className="list-none text-primary">
               <li>
                 <Link to={"#"}>Instagram</Link>
               </li>
@@ -73,8 +73,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-black">
-        <div className="max-w-7xl mx-auto text-center p-5 text-white">
+      <div className="bg-tertiary">
+        <div className="max-w-7xl mx-auto text-center p-5 text-primary">
           Copyright © {new Date().getFullYear()} Nexus News
         </div>
       </div>
