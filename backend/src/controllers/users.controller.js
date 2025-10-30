@@ -6,7 +6,9 @@ async function getAllUser(req, res) {
     if (queryNames.length > 0) return getSpecificUser(req, res, queryNames);
 
     try {
-        const result = await User.find();
+        const result = await User.find().select(
+            "name email role picture_url is_suspended createdAt updatedAt"
+        );
 
         res.status(200).send({
             ok: true,
@@ -31,9 +33,11 @@ async function getSpecificUser(req, res, queryNames) {
     });
 
     try {
-        const result = await User.find(newObj);
+        const result = await User.find(newObj).select(
+            "name email role picture_url is_suspended createdAt updatedAt"
+        );
 
-        if (!result) {
+        if (result.length < 1) {
             return res.status(404).send({
                 ok: false,
                 message: "User not found",
@@ -59,7 +63,9 @@ async function getSpecificUser(req, res, queryNames) {
 
 async function getUser(req, res) {
     try {
-        const result = await User.findById(req.params.id);
+        const result = await User.findById(req.params.userid).select(
+            "name email role picture_url is_suspended createdAt updatedAt"
+        );
 
         if (!result) {
             return res.status(404).send({
@@ -84,28 +90,32 @@ async function getUser(req, res) {
     }
 }
 
-// async function createUser(req, res) {
-//   try {
-//     const result = await User.create({
-//       name: req.body.name,
-//       email: req.body.email,
-//       password: req.body.password,
-//     });
+async function deleteUser(req, res) {
+    try {
+        const result = await User.findByIdAndDelete(req.params.userId);
 
-//     res.status(201).send({
-//       ok: true,
-//       message: "User created",
-//       data: result,
-//     });
-//   } catch (err) {
-//     res.status(404).send({
-//       ok: false,
-//       message: "Something went wrong",
-//       error: err instanceof Error ? err.message : err,
-//       errorType: err instanceof Error ? err.name : "Error",
-//     });
-//   }
-// }
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "User not found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "User deleted successfully",
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
 
 async function updateUser(req, res) {
     try {

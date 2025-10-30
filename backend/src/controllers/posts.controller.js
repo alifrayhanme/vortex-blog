@@ -19,7 +19,7 @@ async function getPosts(req, res) {
         res.status(200).send({
             ok: true,
             message: "Posts found",
-            currentPage: req.query.page || 1,
+            currentPage: parseInt(req.query.page) || 1,
             maxPage,
             data: result,
         });
@@ -94,7 +94,10 @@ async function getPostWithSearchParams(req, res) {
 
 async function getPost(req, res) {
     try {
-        const result = await Post.findById(req.params.id).populate('author', 'name email picture_url');
+        const result = await Post.findById(req.params.postId).populate(
+            "author",
+            "name email picture_url"
+        );
 
         if (!result) {
             return res.status(404).send({
@@ -120,6 +123,28 @@ async function getPost(req, res) {
     }
 }
 
+async function getCategories(_, res) {
+    try {
+        const categories = await Post.aggregate([
+            { $group: { _id: "$category", posts: { $sum: 1 } } },
+            { $project: { category: "$_id", posts: 1, _id: 0 } },
+        ]);
+
+        res.status(200).send({
+            ok: true,
+            message: "Categories found",
+            data: categories,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 async function createPost(req, res) {
     const userReq = req.body;
 
@@ -128,9 +153,7 @@ async function createPost(req, res) {
             title: userReq.title,
             author: userReq.author,
             category: userReq.category,
-            image_url: userReq.image_url
-                ? userReq.image_url
-                : "/assets/default-post-image.webp",
+            image_url: userReq.image_url || "/assets/default-post-image.webp",
             content: userReq.content,
         });
 
@@ -149,17 +172,54 @@ async function createPost(req, res) {
     }
 }
 
-async function getCategories(req, res) {
+async function editPost(req, res) {
     try {
-        const categories = await Post.aggregate([
-            { $group: { _id: "$category", posts: { $sum: 1 } } },
-            { $project: { category: "$_id", posts: 1, _id: 0 } }
-        ]);
+        const result = await Post.findByIdAndUpdate(
+            req.params.postId,
+            req.body,
+            { new: true }
+        );
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "Unable to find document",
+                errorType: "NotFound",
+            });
+        }
 
         res.status(200).send({
             ok: true,
-            message: "Categories found",
-            data: categories,
+            message: "Post updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
+async function deletePost(req, res) {
+    try {
+        const result = await Post.findByIdAndDelete(req.params.postId);
+
+        if (!result) {
+            return res.status(200).send({
+                ok: false,
+                message: "Something went wrong",
+                error: "Requested Post not found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "Post deleted successfully",
         });
     } catch (err) {
         res.status(404).send({
@@ -258,7 +318,6 @@ async function updatePost(req, res) {
 module.exports = {
     getPosts,
     getPost,
-    createPost,
     getCategories,
     getUserPosts,
     updatePost,

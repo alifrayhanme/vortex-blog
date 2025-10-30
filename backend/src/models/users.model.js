@@ -53,23 +53,23 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 userSchema.statics.isEmailTaken = async function (email) {
-  const user = await this.findOne({ email });
-  return !!user;
+    const user = await this.findOne({ email });
+    return !!user;
 };
 
 userSchema.methods.isPasswordMatch = async function (password) {
-  return bcrypt.compare(password, this.password);
+    return bcrypt.compare(password, this.password);
 };
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+    if (!this.isModified("password")) return next();
 
-  try {
-    this.password = await bcrypt.hash(this.password, 10); // Increased salt rounds for better security
-    next();
-  } catch (error) {
-    next(error);
-  }
+    try {
+        this.password = await bcrypt.hash(this.password, 10); // Increased salt rounds for better security
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 const User = model("Users", userSchema, "users");
