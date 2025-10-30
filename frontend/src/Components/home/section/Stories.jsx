@@ -1,8 +1,4 @@
-import React from "react";
-import { Link } from "react-router";
 import { useGetPostWithCategoryQuery } from "../../../features/api/apiSlice";
-import Card from "../ui/Card";
-import Subscribe from "../ui/Subscribe";
 import CardImage from "../ui/CardImage";
 import CardContent from "../ui/CardContent";
 

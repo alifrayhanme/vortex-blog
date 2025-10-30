@@ -1,32 +1,27 @@
-
 import React, { useState, useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import Image from '@tiptap/extension-image'
-import { useCreatePostMutation, useUploadImageMutation } from '../features/api/apiSlice'
-import { useNavigate } from 'react-router'
+import { useUpdatePostMutation, useUploadImageMutation, useGetPostQuery } from '../features/api/apiSlice'
+import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '../features/auth/authSlice'
 import { FaBold, FaItalic, FaQuoteLeft, FaList, FaListOl } from 'react-icons/fa'
 
-const CreatePost = () => {
+const EditPost = () => {
+  const { id } = useParams()
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
   const [image, setImage] = useState(null)
   const [imagePreview, setImagePreview] = useState('')
-  const [createPost, { isLoading: isCreating }] = useCreatePostMutation()
+  const [updatePost, { isLoading: isUpdating }] = useUpdatePostMutation()
   const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation()
+  const { data: postData, isLoading: isLoadingPost } = useGetPostQuery(id)
   const navigate = useNavigate()
   const currentUser = useSelector(selectCurrentUser)
   
-  const isLoading = isCreating || isUploading
-
-  useEffect(() => {
-    if (!currentUser) {
-      navigate('/login')
-    }
-  }, [currentUser, navigate])
+  const isLoading = isUpdating || isUploading
 
   const editor = useEditor({
     extensions: [
@@ -48,6 +43,15 @@ const CreatePost = () => {
     }
   })
 
+  useEffect(() => {
+    if (postData?.data) {
+      setTitle(postData.data.title)
+      setCategory(postData.data.category)
+      setImagePreview(postData.data.image_url)
+      editor?.commands.setContent(postData.data.content)
+    }
+  }, [postData, editor])
+
   const categories = ['Technology', 'Health', 'Business', 'Sports', 'Politics', 'Science', 'Arts', 'World']
 
   const handleImageChange = (e) => {
@@ -63,58 +67,46 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    if (!title || !category || !editor?.getHTML() || !image) {
-      alert('Please fill all fields and select an image')
-      return
-    }
-
-    // Check if user is authenticated
-    const token = localStorage.getItem('accessToken')
-    if (!currentUser?._id || !token) {
-      alert('User authentication error. Please login again.')
-      localStorage.removeItem('accessToken')
-      localStorage.removeItem('user')
-      navigate('/signin')
+    if (!title || !category || !editor?.getHTML()) {
+      alert('Please fill all required fields')
       return
     }
 
     try {
-      // Upload image first
-      const imageFormData = new FormData()
-      imageFormData.append('image', image)
-      const imageResponse = await uploadImage(imageFormData).unwrap()
+      let imageUrl = postData?.data?.image_url
+
+      if (image) {
+        const imageFormData = new FormData()
+        imageFormData.append('image', image)
+        const imageResponse = await uploadImage(imageFormData).unwrap()
+        imageUrl = imageResponse.imageUrl
+      }
       
-      // Create post with image URL
-      const postData = {
+      const postUpdateData = {
+        id,
         title,
         category,
         content: editor.getHTML(),
-        author: currentUser._id,
-        image_url: imageResponse.imageUrl
+        image_url: imageUrl
       }
       
-      await createPost(postData).unwrap()
-      navigate('/')
+      await updatePost(postUpdateData).unwrap()
+      navigate('/dashboard')
     } catch (error) {
-      console.error('Failed to create post:', error)
-      
-      // Check if it's an authentication error
-      if (error.status === 401 || error.data?.message?.includes('token') || error.data?.message?.includes('Unauthorized')) {
-        alert('User authentication error. Please login again.')
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('user')
-        navigate('/signin')
-      } else {
-        alert('Failed to create post. Please try again.')
-      }
+      console.error('Failed to update post:', error)
+      alert('Failed to update post. Please try again.')
     }
+  }
+
+  if (isLoadingPost) {
+    return <div className="max-w-4xl mx-auto p-6">Loading...</div>
   }
 
   if (!editor) return null
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Create New Post</h1>
+      <h1 className="text-3xl font-bold mb-8">Edit Post</h1>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -151,7 +143,6 @@ const CreatePost = () => {
             accept="image/*"
             onChange={handleImageChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            required
           />
           {imagePreview && (
             <img src={imagePreview} alt="Preview" className="mt-4 max-w-xs h-auto rounded-lg" />
@@ -161,7 +152,6 @@ const CreatePost = () => {
         <div>
           <label className="block text-sm font-medium mb-2">Content</label>
           
-          {/* Editor Toolbar */}
           <div className="border border-gray-300 rounded-t-lg p-3 bg-gray-50 flex flex-wrap gap-2">
             <button
               type="button"
@@ -208,7 +198,6 @@ const CreatePost = () => {
                 }
               }}
               className="px-3 py-1 rounded border"
-              aria-label="Select heading level"
             >
               <option value="0">Paragraph</option>
               <option value="1">Heading 1</option>
@@ -217,7 +206,6 @@ const CreatePost = () => {
             </select>
           </div>
 
-          {/* Editor Content */}
           <div className="border border-t-0 border-gray-300 rounded-b-lg">
             <EditorContent editor={editor} />
           </div>
@@ -229,11 +217,11 @@ const CreatePost = () => {
             disabled={isLoading}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Creating...' : 'Create Post'}
+            {isLoading ? 'Updating...' : 'Update Post'}
           </button>
           <button
             type="button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/dashboard')}
             className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
           >
             Cancel
@@ -244,4 +232,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default EditPost

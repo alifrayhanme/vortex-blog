@@ -1,6 +1,4 @@
-import React from "react";
 import ViewAll from "../ui/ViewAll";
-import Card from "../ui/Card";
 import { useGetPostWithCategoryQuery } from "../../../features/api/apiSlice";
 import CardContent from "../ui/CardContent";
 

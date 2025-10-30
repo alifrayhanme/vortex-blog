@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router";
 import { useGetPostQuery } from "../features/api/apiSlice";
 import LikeComments from "../Components/interactions/LikeComments";
+import { capitalizeName } from "../utils/nameUtils";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -24,8 +25,8 @@ const PostDetails = () => {
         <div className="flex items-center gap-1 mb-6 text-gray-600 text-sm">
           <span>
             By
-            <span className="capitalize pl-1">
-              {post.author?.name || "Unknown Author"}
+            <span className="pl-1">
+              {capitalizeName(post.author?.name) || "Unknown Author"}
             </span>
           </span>
 
