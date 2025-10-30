@@ -107,7 +107,106 @@ async function getUser(req, res) {
 //   }
 // }
 
+async function updateUser(req, res) {
+    try {
+        const result = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                name: req.body.name,
+                bio: req.body.bio,
+                picture_url: req.body.picture_url,
+            },
+            { new: true }
+        );
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "User not found",
+                error: "No User Found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "User updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
+async function updateUserStatus(req, res) {
+    try {
+        const result = await User.findByIdAndUpdate(
+            req.params.id,
+            { status: req.body.status },
+            { new: true }
+        );
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "User not found",
+                error: "No User Found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "User status updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(500).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
+async function deleteUser(req, res) {
+    try {
+        const result = await User.findByIdAndDelete(req.params.id);
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "User not found",
+                error: "No User Found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "User deleted successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(500).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 module.exports = {
     getAllUser,
     getUser,
+    updateUser,
+    updateUserStatus,
+    deleteUser,
 };

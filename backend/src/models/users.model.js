@@ -39,6 +39,16 @@ const userSchema = new Schema(
       default:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
     },
+    bio: {
+      type: String,
+      default: "",
+      maxLength: 500,
+    },
+    status: {
+      type: String,
+      enum: ["active", "suspended"],
+      default: "active",
+    },
   },
   { timestamps: true }
 );

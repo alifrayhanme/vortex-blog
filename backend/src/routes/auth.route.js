@@ -1,4 +1,4 @@
-const { Router, urlencoded } = require("express");
+const { Router, urlencoded, json } = require("express");
 const {
   registerUser,
   loginUser,
@@ -11,6 +11,7 @@ const {
 const router = Router();
 
 router.use(urlencoded({ extended: true }));
+router.use(json());
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);

@@ -8,5 +8,8 @@ router.use(urlencoded({ extended: true }));
 
 router.get("/", userController.getAllUser);
 router.get("/:id", userController.getUser);
+router.put("/:id", userController.updateUser);
+router.patch("/:id/status", userController.updateUserStatus);
+router.delete("/:id", userController.deleteUser);
 
 module.exports = router;

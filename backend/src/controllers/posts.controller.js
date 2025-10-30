@@ -171,9 +171,96 @@ async function getCategories(req, res) {
     }
 }
 
+async function getUserPosts(req, res) {
+    try {
+        const result = await Post.find({ author: req.params.userId }).populate('author', 'name email picture_url');
+
+        res.status(200).send({
+            ok: true,
+            message: "User posts found",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
+async function deletePost(req, res) {
+    try {
+        const result = await Post.findByIdAndDelete(req.params.id);
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Post not found",
+                error: "No Post Found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "Post deleted successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
+async function updatePost(req, res) {
+    try {
+        const result = await Post.findByIdAndUpdate(
+            req.params.id,
+            {
+                title: req.body.title,
+                category: req.body.category,
+                content: req.body.content,
+                image_url: req.body.image_url,
+            },
+            { new: true }
+        );
+
+        if (!result) {
+            return res.status(404).send({
+                ok: false,
+                message: "Post not found",
+                error: "No Post Found",
+                errorType: "NotFound",
+            });
+        }
+
+        res.status(200).send({
+            ok: true,
+            message: "Post updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            message: "Something went wrong",
+            error: err instanceof Error ? err.message : err,
+            errorType: err instanceof Error ? err.name : "Error",
+        });
+    }
+}
+
 module.exports = {
     getPosts,
     getPost,
     createPost,
     getCategories,
+    getUserPosts,
+    updatePost,
+    deletePost,
 };

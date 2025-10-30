@@ -20,6 +20,7 @@ async function registerUser(req, res) {
       name: userBody.name,
       email: userBody.email,
       password: userBody.password,
+      ...(userBody.picture_url && { picture_url: userBody.picture_url }),
     });
 
     const userResponse = user.toObject();
@@ -78,12 +79,14 @@ async function loginUser(req, res) {
       success: true,
       message: "Login successful!",
       data: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
+        picture_url: user.picture_url,
         lastLogin: user.lastLogin,
       },
+      accessToken: accessToken,
     });
   } catch (err) {
     console.error("Login error:", err);

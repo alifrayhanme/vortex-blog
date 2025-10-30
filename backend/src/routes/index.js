@@ -11,6 +11,7 @@ const { upload } = require("../configs/cloudinary.config.js");
 const router = Router();
 
 router.use("/user", userRouter);
+router.use("/users", userRouter);
 router.use("/post", postRouter);
 router.use("/auth", json(), authRouter);
 router.use("/likes", likesRouter);
